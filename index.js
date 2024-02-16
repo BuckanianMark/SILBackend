@@ -28,6 +28,11 @@ app.use("/api/users",userRouter)
 app.use("/api/albums",albumRouter)
 
 app.use("/api/photos", photoRouter)
+app.use("/", (req,res) => {
+    return res.json({
+        message:"Welcome to the Node.js REST API"
+    })
+})
 
 app.use((obj,req,res,next) => {
     const statusCode = obj.status || 500;
