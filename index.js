@@ -45,6 +45,12 @@ app.use((obj,req,res,next) => {
     })
 })
 
-app.listen(process.env.PORT,() => {
+const server= app.listen(process.env.PORT,() => {
     console.log(`App is running on port ${process.env.PORT}`)
+})
+
+process.on("unhandledRejection", (error,promise) => {
+    console.log(`Logged Error ${error}`);
+    server.close(() => process.exit(1))
+    s
 })
