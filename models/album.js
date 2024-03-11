@@ -1,4 +1,5 @@
 import mongoose from "mongoose";
+import mongoosePaginate from "mongoose-paginate";
 
 const albumSchema = mongoose.Schema({
     User:{
@@ -11,5 +12,6 @@ const albumSchema = mongoose.Schema({
         required:true
     }
 })
+albumSchema.plugin(mongoosePaginate);
 
 export default mongoose.model("Album",albumSchema)

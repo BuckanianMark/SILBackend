@@ -26,6 +26,31 @@ export const getAlbumById = async (req,res,next) => {
     }
 }
 
+export const getPaginatedAlbums = async(req,res) => {
+    try {
+        const page = parseInt(req.query.page) -1 || 0 ;
+        const limit = parseInt(req.query.limit) || 5;
+
+        const albums = await Album.find({})
+                .skip(page * limit)
+                .limit(limit)
+        console.log(albums)
+        const total = await Album.countDocuments({})
+        const response = {
+            error:false,
+            total,
+            page:page+1,
+            limit,
+            albums
+        }
+        res.status(200).json(response)
+    } catch (error) {
+        res.status(500).send("Server breakdown!!");
+    }
+  
+  
+}
+
 export const addAlbum = async (req,res,next) => {
     try {
         if(req.body !== ''){
@@ -39,6 +64,7 @@ export const addAlbum = async (req,res,next) => {
             return res.status(400).send("Bad Request")
         }
     } catch (error) {
+       
         res.status(500).send("Server Breakdown!!") 
     }
 }
