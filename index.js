@@ -19,7 +19,7 @@ app.use(express.json());
 mongoose.connect(process.env.MONGO_URI)
 mongoose.connection
 .once("open",() => console.log("Connected to database"))
-.on("error",(e) => console.log(`Error :${e} `))
+.on("error",(e) => console.log(`Error :${e} `));
 
 app.use("/api/auth",authUserRouter)
 
